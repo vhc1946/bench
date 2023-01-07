@@ -1,0 +1,3 @@
+[submodule "bin/repo"]
+	path = bin/repo
+	url = https://github.com/vhc1946/electronrepo.git
