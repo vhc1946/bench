@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import './style/vhp-react-app.css';
+import './style/vhp-react-toolbar.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
