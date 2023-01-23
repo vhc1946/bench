@@ -1,61 +1,18 @@
 import React, {Component} from 'react';
 
+import {ToolBar} from './ToolBar';
 /* APP BOX
 
   The App Box can supply every Compont / functionality used by every / most / some
   apps. It is included as an extension of an App.
 
   TODO:
-  <TitleBar/>
+  <ToolBar/>
   <UserView/> (log in/out/settings)
   <DropNote/>
   <
 */
 
-
-/* Title Bar
-
-  Holds descriptions and functionality for the App as well as the current task
-
-
-*/
-
-class ToolBar extends Component{
-  constructor({
-    qacts={},
-    macts={}
-  }){
-    super();
-    this.state={//
-      qacts:{},
-      macts:{},
-      toggleMore:false
-    }
-
-
-  }
-
-
-
-  //ADDmactions(){}
-  //ADDqactions(){}
-
-
-  render(){
-    return(
-      <div id='titlebar-cont' className='titlebar'>
-        <div id='titlebar-cont-left'>
-          <img src='http://vhpportal.com/Tech/bin/repo/assets/icons/V-Mark-red.png' id='titlebar-button-home' className='titlebar-button-action'/>
-          <img src='http://vhpportal.com/Tech/bin/repo/assets/icons/menu-burger.png' id='titlebar-button-more' className='titlebar-button-action'/>
-          <div id='titlebar-moretools'></div>
-          <div id='titlebar-titlebar-moretools-quick'></div>
-        </div>
-        <div id="titlebar-title"></div>
-        <div id="titlebar-cont-right"></div>
-      </div>
-    )
-  }
-}
 
 class UserView extends Component{
 

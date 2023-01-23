@@ -35,7 +35,7 @@ export class TableContainer extends Component {
                 visible:!this.state.visible
             });
         }
-        
+
     }
 
     /**
@@ -60,8 +60,8 @@ export class TableContainer extends Component {
     render() {
         return(
             <div className = "container" id = {this.id}>
-                <ActionButton 
-                    text = {"Open Repair List"} 
+                <ActionButton
+                    text = {"Open Repair List"}
                     ClickFunction = {this.ToggleTable}
                 />
                 <DataTable

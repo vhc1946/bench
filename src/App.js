@@ -35,8 +35,29 @@ class DevApp extends VHPapp{
 
 var configdefault = {
   tb:{
-    qacts:{},
-    macts:{}
+    qacts:[
+      {id:''}
+    ],
+    macts:[
+      {
+        key:'save',
+        id:'wo-save-button',
+        src:'http://vhpportal.com/Tech/bin/repo/assets/icons/disk.png',
+        title:'Save WO',
+        onClick:(ele)=>{
+          console.log('Save Page');
+        }
+      },
+      {
+        key:'refresh',
+        id:'wo-refresh-button',
+        src:'http://vhpportal.com/Tech/bin/repo/assets/icons/refresh.png',
+        title:'Refresh WO',
+        onClick:(ele)=>{   // Refresh info
+          console.log('Refresh Page')
+        }
+      }
+    ]
   }
 }
 function App() {
