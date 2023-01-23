@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+.action-button {
+  background-color: #282c34;
+  color:#fff;
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -29,16 +37,15 @@
 }
 
 .container {
-  height: 300px;
-  width: 800px;
-  background-color: rgb(192, 32, 64);
+  height: calc(100vh - 90px);
+  width: 100vw;
 }
 
 #repair-table-cont {
   background-color: darksalmon;
   position: absolute;
   left: 100px;
-  top: 10px;
+  bottom: 10px;
   overflow: scroll;
 }
 

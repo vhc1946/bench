@@ -1,10 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import { TableContainer } from './Components/TableContainer';
-import { Data } from './TestData';
-import { Data2 } from './TestData2';
 
 import {VHPapp} from './Components/VHP/AppBox';
+import React, {Component} from 'react';
+import { Ticket } from './Data/Ticket'
 
 
 /* Template App
@@ -17,17 +15,18 @@ import {VHPapp} from './Components/VHP/AppBox';
   It may be useful to then store that config in state to be available for change
   by the App
 
-
+  //Removed inheritance and set render function within VHCapp
 */
-class DevApp extends VHPapp{
+
+class DevApp extends Component{
   constructor(props){
     super(props);
   }
   render(){
     return(
-      <div>
-        <>{this.deliverTools()}</>
-      </div>
+      <>
+        <VHPapp config = {this.props.config} ticket={Ticket}></VHPapp>
+      </>
     );
   }
 }
@@ -35,13 +34,16 @@ class DevApp extends VHPapp{
 
 var configdefault = {
   tb:{
-    qacts:{},
+    qacts:[],
     macts:{}
   }
 }
+
 function App() {
   return (
-    <DevApp config={configdefault}/>
+    <div className = "App">
+      <DevApp config={configdefault}/>
+    </div>
   );
 }
 

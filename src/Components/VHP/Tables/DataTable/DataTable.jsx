@@ -41,7 +41,7 @@ export class DataTable extends Component {
      * @returns render object
      */
     render() {
-        if (this.props.visible == false) {
+        if (this.props.active == false) {
             return null
         } else {
             return(
@@ -53,7 +53,7 @@ export class DataTable extends Component {
                     />
                     {this.props.data.map((val, key) => {
                         return (
-                            <TableRow data={val}></TableRow>
+                            <TableRow key = {key} data={val}></TableRow>
                         )
                     })}
                 </div>

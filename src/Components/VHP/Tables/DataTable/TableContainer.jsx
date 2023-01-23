@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ActionButton } from './ActionButton';
-import { DataTable } from './RepairTable/DataTable';
+import { ActionButton } from '../VHP/ActionButton';
+import { DataTable } from './DataTable';
 
 export class TableContainer extends Component {
     constructor(props) {
@@ -9,7 +9,7 @@ export class TableContainer extends Component {
         this.id = props.id;
 
         this.state = {
-            visible:false,
+            active:false,
             data:props.data||[],
             filtered:false
         }
@@ -19,6 +19,7 @@ export class TableContainer extends Component {
          */
         this.ToggleTable = this.ToggleTable.bind(this)
         this.UpdateData = this.UpdateData.bind(this)
+        console.log("Constructing TableContainer")
     }
 
     /////////TABLE FUNCTIONS/////////////////
@@ -28,11 +29,11 @@ export class TableContainer extends Component {
     ToggleTable(set){
         if (set) {
             this.setState({
-                visible:set
+                active:set
             });
         } else {
             this.setState({
-                visible:!this.state.visible
+                active:!this.state.active
             });
         }
         
@@ -44,7 +45,6 @@ export class TableContainer extends Component {
      * @param {object} newData : object this.state.data is set to
      */
     UpdateData(newData) {
-        console.log(newData)
         if (newData == null || newData == undefined) {
             this.setState({
                 data:this.props.data
@@ -65,7 +65,7 @@ export class TableContainer extends Component {
                     ClickFunction = {this.ToggleTable}
                 />
                 <DataTable
-                    visible = {this.state.visible}
+                    active = {this.state.active}
                     data = {this.state.data}
                     id = "repair-table-cont"
                     ToggleTable = {this.ToggleTable}

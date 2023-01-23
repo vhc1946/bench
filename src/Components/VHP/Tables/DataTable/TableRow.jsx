@@ -13,7 +13,7 @@ export class TableRow extends Component {
         return(
             <div className = "tablerow">
                 {Object.keys(this.props.data).map((keyName, i) => (
-                    <div className={keyName}>{this.props.data[keyName]}</div>
+                    <div key = {keyName} className={keyName}>{this.props.data[keyName]}</div>
                 ))}
             </div>
         );

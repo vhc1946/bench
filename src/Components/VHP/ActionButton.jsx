@@ -4,6 +4,12 @@ export class ActionButton extends Component {
     constructor(props) {
         super(props)
 
+        if (props.ButtonType) {
+            this.ButtonType = this.props.ButtonType
+        } else {
+            this.ButtonType = 'action-button'
+        }
+
         this.handleClick = this.handleClick.bind(this)
     }
 
@@ -12,18 +18,17 @@ export class ActionButton extends Component {
      * Can optionally pass data using props.data
      */
     handleClick(e){
+        console.log("Click!")
         this.props.ClickFunction(this.props.data)
     }
 
     render() {
         return(
-            <div>
-                <button 
-                    onClick = {this.handleClick} 
-                    className = "Action-Button" 
-                    id = {this.props.id}>
-                        {this.props.text}
-                </button>
+            <div 
+                onClick = {this.handleClick} 
+                className = {this.ButtonType}
+                id = {this.props.id}>
+                    {this.props.text}
             </div>
         );
     }

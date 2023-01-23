@@ -1,65 +1,18 @@
 import React, {Component} from 'react';
+import { ToolBar } from '../VHP/ToolBar'
+import { UserView } from './UserView';
+import { MainContainer } from '../MainContainer';
 
 /* APP BOX
 
-  The App Box can supply every Compont / functionality used by every / most / some
+  The App Box can supply every Component / functionality used by every / most / some
   apps. It is included as an extension of an App.
 
   TODO:
   <TitleBar/>
   <UserView/> (log in/out/settings)
   <DropNote/>
-  <
 */
-
-
-/* Title Bar
-
-  Holds descriptions and functionality for the App as well as the current task
-
-
-*/
-
-class ToolBar extends Component{
-  constructor({
-    qacts={},
-    macts={}
-  }){
-    super();
-    this.state={//
-      qacts:{},
-      macts:{},
-      toggleMore:false
-    }
-
-
-  }
-
-
-
-  //ADDmactions(){}
-  //ADDqactions(){}
-
-
-  render(){
-    return(
-      <div id='titlebar-cont' className='titlebar'>
-        <div id='titlebar-cont-left'>
-          <img src='http://vhpportal.com/Tech/bin/repo/assets/icons/V-Mark-red.png' id='titlebar-button-home' className='titlebar-button-action'/>
-          <img src='http://vhpportal.com/Tech/bin/repo/assets/icons/menu-burger.png' id='titlebar-button-more' className='titlebar-button-action'/>
-          <div id='titlebar-moretools'></div>
-          <div id='titlebar-titlebar-moretools-quick'></div>
-        </div>
-        <div id="titlebar-title"></div>
-        <div id="titlebar-cont-right"></div>
-      </div>
-    )
-  }
-}
-
-class UserView extends Component{
-
-}
 
 /* VHP APP
   Will be the extension for every app created. In it will be options for the app
@@ -72,26 +25,67 @@ export class VHPapp extends Component{
     //tools to seperate the state from App's
     //things in the tool box are public to the rest of the App
     this.state={
-      config:{
-        tb:{
-          active:true,
-          qacts:props.config.tb.qacts||{},
-          macts:props.config.tb.macts||{}
-        },
-      }
+      tb:{
+        active:true,
+        qacts:props.config.tb.qacts||[],
+        macts:props.config.tb.macts||{}
+      },
+      ticket:props.ticket
     }
+    
+
+    this.ToggleToolBar = this.ToggleToolBar.bind(this)
+    this.AddQAction = this.AddQAction.bind(this)
+    this.UpdateTicket = this.UpdateTicket.bind(this)
   }
 
-  toolBar(){return(<ToolBar {...this.state.config.tb}/>)}//deliver TitleBar
+  /**
+     * Updates a specified prop in the ticket object
+     * TODO: Support for deep nesting (Currently only nests one deep)
+     * May need to copy object, update nested object, then set state to new object
+     * @param {*} prop : prop to be updated
+     * @param {*} data : data prop is set to
+     */
+  UpdateTicket(params) {
+    console.log("updating ticket", params.prop, params.data)
+    console.log(this.state.ticket)
+    this.setState({
+      ticket:{...this.state.ticket, total: params.data}
+    })
+  }
+
+  /**
+   * Toggle visiblity of the tool bar
+   */
+  ToggleToolBar() {
+    this.setState({
+      tb:{...this.state.tb, active: !this.state.tb.active}
+    })
+  }
+
+  /**
+   * Adds a new div to the quick actions
+   */
+  AddQAction() {
+    this.setState({
+      tb:{...this.state.tb, qacts: [this.state.tb.qacts, <div key = "test">Test!</div>]}
+    })
+  }
+
+  toolBar(){return(<ToolBar {...this.state.tb}/>)}//deliver TitleBar
   userView(){return(<UserView/>)}//deliver UserView
 
 
   //will render every need vhpapp tools
-  deliverTools(){
+  render(){
     return(
-      <>
-        {this.state.config.tb.active&&this.toolBar()}
-      </>
+      <div>
+        {this.state.tb.active&&this.toolBar()}
+        <MainContainer 
+          ticket={this.state.ticket} 
+          UpdateTicket = {this.UpdateTicket}
+        />
+      </div>
     )
   }
 }
