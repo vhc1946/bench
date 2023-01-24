@@ -1,8 +1,9 @@
 import './App.css';
 
-import {VHPapp} from './Components/VHP/AppBox';
+import {VHPapp} from './Components/VHP/Admin/AppBox';
 import React, {Component} from 'react';
 import { Ticket } from './Data/Ticket'
+import {MainContainer} from './Components/MainContainer'
 
 
 /* Template App
@@ -18,7 +19,7 @@ import { Ticket } from './Data/Ticket'
   //Removed inheritance and set render function within VHCapp
 */
 
-class DevApp extends Component{
+/*class DevApp extends Component{
   constructor(props){
     super(props);
   }
@@ -29,16 +30,70 @@ class DevApp extends Component{
       </>
     );
   }
+}*/
+
+
+class DevApp extends VHPapp{
+  constructor(props){
+    super(props);
+  }
+
+  renderApp(props){
+    return(
+      <>
+        {this.deliverTools()}
+        <div>
+          <MainContainer ticket={Ticket}/>
+        </div>
+      </>
+    )
+  }
+  render(){
+    if (this.state.config.user.loggedIn == true) {
+      return (
+        <>
+          {this.userLogIO()}
+          {this.renderApp()}
+        </>
+      )
+    } else {
+      return(
+          <>
+            {this.userLogIO() || this.renderApp()}
+          </>
+      );
+    }
+  }
 }
 
 
 var configdefault = {
   tb:{
     qacts:[],
-    macts:{}
+    macts:[
+      {
+        key:'save',
+        id:'wo-save-button',
+        src:'http://vhpportal.com/Tech/bin/repo/assets/icons/disk.png',
+        title:'Save WO',
+        onClick:(ele)=>{
+          console.log('Save Page');
+        }
+      },
+      {
+        key:'refresh',
+        id:'wo-refresh-button',
+        src:'http://vhpportal.com/Tech/bin/repo/assets/icons/refresh.png',
+        title:'Refresh WO',
+        onClick:(ele)=>{   // Refresh info
+          console.log('Refresh Page')
+        }
+      }
+    ]
+  },
+  user:{
   }
 }
-
 function App() {
   return (
     <div className = "App">

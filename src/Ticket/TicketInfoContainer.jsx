@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ActionButton } from '../Components/VHP/ActionButton';
-import { MenuTabBar } from '../Components/VHP/MenuTabBar'
+import { ActionButton } from '../Components/VHP/Buttons/ActionButton';
+import { MenuTabBar } from '../Components/VHP/ViewControllers/MenuTabBar'
 
 /**
  * Work Order Info Container

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { ToolBar } from '../VHP/ToolBar'
-import { UserView } from './UserView';
+import { ToolBar } from './ToolBar'
 import { MainContainer } from '../MainContainer';
 
 /* APP BOX
@@ -73,7 +72,6 @@ export class VHPapp extends Component{
   }
 
   toolBar(){return(<ToolBar {...this.state.tb}/>)}//deliver TitleBar
-  userView(){return(<UserView/>)}//deliver UserView
 
 
   //will render every need vhpapp tools

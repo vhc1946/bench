@@ -19,7 +19,6 @@ export class TableContainer extends Component {
          */
         this.ToggleTable = this.ToggleTable.bind(this)
         this.UpdateData = this.UpdateData.bind(this)
-        console.log("Constructing TableContainer")
     }
 
     /////////TABLE FUNCTIONS/////////////////

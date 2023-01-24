@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ServiceItemsContainer } from '../Ticket/ServiceItemsContainer';
 import { TicketInfoContainer } from '../Ticket/TicketInfoContainer';
-import { MenuTabBar } from './VHP/MenuTabBar';
+import { MenuTabBar } from './VHP/ViewControllers/MenuTabBar';
 
 /**
  * Starter class for a main container. This sits below the title bar and tracks the current view

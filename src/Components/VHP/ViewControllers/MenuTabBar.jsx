@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActionButton } from './ActionButton';
+import { ActionButton } from '../Buttons/ActionButton';
 
 /**
  * Creates a row of buttons for a menu bar

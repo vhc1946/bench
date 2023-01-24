@@ -10,7 +10,8 @@
 .action-button {
   background-color: #282c34;
   color:#fff;
-  height: 50px;
+  height: 30px;
+  line-height: 30px;
   width: 100px;
   border-radius: 5px;
 }
