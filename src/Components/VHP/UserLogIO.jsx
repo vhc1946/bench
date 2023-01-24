@@ -7,19 +7,11 @@ export class LogIO extends Component{
     super(props);
 
     this.state={
-      active:this.props.active,
-      name:this.props.name,
-      pswrd:this.props.pswrd
+      active:this.props.user.active,
+      name:this.props.user.name,
+      pswrd:this.props.user.pswrd
     }
-    this.submitLogIO = this.submitLogIO.bind(this);
   }
-
-  submitLogIO(ele){
-    console.log(ele.target)
-    this.setState({active:false});
-
-  }
-
   render(){
     if(this.state.active){
     return(
@@ -37,7 +29,7 @@ export class LogIO extends Component{
               <div className = "login-action-button"
                    id="login-submit"
                    className="flat-action-button"
-                   onClick={this.props.subLogIO}>SUBMIT</div>
+                   onClick={this.props.clickFun}>SUBMIT</div>
               <div className = "login-action-button"
                    id="logiout-button"
                    className="flat-action-button">LOGOUT</div>

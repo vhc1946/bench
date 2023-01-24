@@ -41,15 +41,21 @@ export class VHPapp extends Component{
 
       }
     }
+    this.OClogIO = this.OClogIO.bind(this);
   }
 
   toolBar(){return(<ToolBar {...this.state.config.tb}/>)}//deliver TitleBar
   OClogIO(ele){
-    console.log(this.setState({...this.state.config.user,active:false}));
+    let c = {
+      tb:{...this.state.config.tb},
+      user:{...this.state.config.user}
+    }
+    c.user.active=false;
+    this.setState({config:c});
   }
   userLogIO(){
     if(this.state.config.user.active){
-      return(<LogIO {...this.state.config.user},{subLogIO:this.OClogIO}}/>)//deliver UserView
+      return(<LogIO user={this.state.config.user} clickFun={this.OClogIO}/>)//deliver UserView
     }else{return false}
   }
 
