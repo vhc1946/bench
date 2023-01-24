@@ -23,10 +23,23 @@ class DevApp extends VHPapp{
   constructor(props){
     super(props);
   }
+
+  renderApp(props){
+    return(
+      <>
+      {this.deliverTools()}
+      <div>
+        App content
+      </div>
+      </>
+    )
+  }
   render(){
     return(
       <div>
-        <>{this.deliverTools()}</>
+        <>
+        {this.userLogIO() || this.renderApp()}
+        </>
       </div>
     );
   }
@@ -35,9 +48,7 @@ class DevApp extends VHPapp{
 
 var configdefault = {
   tb:{
-    qacts:[
-      {id:''}
-    ],
+    qacts:[],
     macts:[
       {
         key:'save',
@@ -58,6 +69,8 @@ var configdefault = {
         }
       }
     ]
+  },
+  user:{
   }
 }
 function App() {

@@ -11,11 +11,10 @@ import {ActionButton} from '../ActionButton';
 export class ToolBar extends Component{
   constructor(props){
     super(props);
-    console.log(props);
     this.state={//
       qacts:props.qacts||[],
       macts:props.macts||[],
-      toggleMore:true
+      toggleMore:false
     }
    this.ToggleMore = this.ToggleMore.bind(this);
 
@@ -28,12 +27,12 @@ export class ToolBar extends Component{
     });
   }
   ADDmactions(){
-    console.log(this.state.macts)
     return(
       <div id="titlebar-moretools-quick">
       {this.state.macts.map(ma=>{
         return(
         <img
+          key={ma.key}
           id={ma.id}
           className='titlebar-button-action'
           onClick={ma.onClick}
@@ -60,7 +59,6 @@ export class ToolBar extends Component{
       </div>
     )
   }
-
 
   render(){
     return(
