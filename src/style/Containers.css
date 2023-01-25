@@ -109,7 +109,7 @@
     border-top-left-radius: 5px;
 }
 
-#job-card-title, #personal-card-title {
+.job-card-title>div, .personal-card-title>div {
     position: relative;
 }
 
@@ -150,14 +150,14 @@
     justify-self: center;
 }
 
-#user-info-confirm-close>div {
+#user-info-confirm-close>.card-content>div {
     display: flex;
     gap:10px;
     padding: 5px;
     justify-content: center;
 }
 
-#user-info-confirm-close>div>.action-button {
+#user-info-confirm-close>.card-content>div>.action-button {
     height: 50px;
     width: 120px;
     line-height: 15px;
@@ -170,14 +170,16 @@
     background-color: var(--included-border)
 }
 
-#user-info-confirm-close>div>.action-button:hover {
+#user-info-confirm-close>.card-content>div>.action-button:hover {
     background-color: var(--included-border-hover);
+    cursor: pointer;
 }
 
 /*Red button for close without save*/
-#user-info-confirm-close>div>#close-no-save {
+#user-info-confirm-close>.card-content>div>#close-no-save {
     background-color: var(--excluded-border);
 }
-#user-info-confirm-close>div>#close-no-save:hover {
+#user-info-confirm-close>.card-content>div>#close-no-save:hover {
     background-color: var(--excluded-border-hover);
+    cursor: pointer;
 }

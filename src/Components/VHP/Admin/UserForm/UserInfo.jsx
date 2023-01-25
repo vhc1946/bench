@@ -2,7 +2,11 @@ import React, {Component} from 'react';
 import { ActionButton } from '../../Buttons/ActionButton';
 import { TextArea } from '../../Inputs/TextArea';
 import { TextInput } from '../../Inputs/TextInput';
-import { CardDialogue } from '../../Cards/CardDialogue';
+import { Card } from '../../Cards/Card';
+import { CardTitlebar } from '../../Cards/CardTitlebar';
+import { CardContent } from '../../Cards/CardContent';
+import { StaticForm } from '../../Forms/StaticForm';
+import { InputForm } from '../../Forms/InputForm';
 
 export class UserInfo extends Component{
 	constructor(props){
@@ -89,19 +93,9 @@ export class UserInfo extends Component{
   	render(){
     	return(
        		<div className = "float-container">
-                <div className = "card" id="user-info-card">
-                    <div class="card-menubar">
-                        <div class = "card-title">
-                            User Information
-                        </div>
-                        <ActionButton 
-                            ClickFunction = {this.ConfirmCloseBeforeSave}
-                            ButtonType = "close-button"
-                            text="X"
-                        />
-                    </div>
+                <Card cardClass = "card" id="user-info-card" title = "User Information" titlebar = {true} actions = {{minimize: null, close:this.ConfirmCloseBeforeSave}}>
                     <div class="card-content" id = "user-card-content">
-                        <div class = "card-content" id="basic-user-info">
+                        <CardContent id="basic-user-info">
                             <div id = "user-fullname">
                                 {this.props.userInfo.firstname + ' ' + this.props.userInfo.lastname}
                             </div>
@@ -114,78 +108,63 @@ export class UserInfo extends Component{
                                     {this.props.userInfo.title}
                                 </div>
                             </div>
-                        </div>
+                        </CardContent>
                         
-                        <div class = "card-content" id="job-info">
-                            <div class="card-menubar">
-                                <div class = "card-title" id="job-card-title">
-                                    Job Information
-                                </div>
-                            </div>
-                            <div class = "card-content" id = "job-info-contents">
-                                <div class="user-info-item">
-                                    <div>Job Type:</div>
-                                    <div>{this.props.userInfo.jobtype}</div>
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Department:</div>
-                                    <div>{this.props.userInfo.dept}</div>
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Reports To:</div>
-                                    <div>{this.props.userInfo.reportto}</div>
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Job Description:</div>
-                                    <div>{this.props.userInfo.jobdescr}</div>
-                                </div>
-                            </div>
-                        </div>
+                        <CardContent id="job-info">
+                            <CardTitlebar title = "Job Information" cardTitlebarClass = "job-card-title"/>
+                            <CardContent id = "job-info-contents">
+                                <StaticForm
+                                    formdata = {[
+                                        {title:"Job Type: ", value:this.props.userInfo.jobtype},
+                                        {title:"Department: ", value:this.props.userInfo.dept},
+                                        {title:"Reports To: ", value:this.props.userInfo.reportto},
+                                        {title:"Job Description: ", value:this.props.userInfo.jobdescr}
+                                    ]}
+                                />
+                            </CardContent>
+                        </CardContent>
 
-                        <div class = "card-content" id="personal-info">
-                            <div class="card-menubar">
-                                <div class = "card-title" id="personal-card-title">
-                                    Personal Information
-                                </div>
-                            </div>
-                            <div class = "card-content" id = "personal-info-contents">
-                                <div class="user-info-item">
-                                    <div>Interests:</div>
-                                    <TextArea
-                                        value={this.state.interests}
-                                        ChangeFunction = {this.SetInterests}
-                                        inputClass = "user-info-form"
-                                    />
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Skills:</div>
-                                    <TextArea
-                                        value={this.state.skills}
-                                        inputClass = "user-info-form"
-                                        ChangeFunction = {this.SetSkills}
-                                    />
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Joined:</div>
-                                    <div>{this.props.userInfo.joined}</div>
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Birthday:</div>
-                                    <TextInput
-                                        value = {this.state.birthday}
-                                        ChangeFunction = {this.SetBirthday}
-                                        type = "date"
-                                    />
-                                </div>
-                                <div class="user-info-item">
-                                    <div>Favorite Emoji:</div>
-                                    <TextInput
-                                        value = {this.state.emoji}
-                                        ChangeFunction = {this.SetEmoji}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                        <CardContent id="personal-info">
+                            <CardTitlebar title = "Personal Information" cardTitlebarClass = "personal-card-title"/>
+                            <CardContent id = "personal-info-contents">
+                                <InputForm
+                                    formdata = {[
+                                        {   
+                                            title:"Interests: ", 
+                                            value:this.state.interests, 
+                                            ChangeFunction:this.SetInterests, 
+                                            inputClass: "user-info-form",
+                                            inputType:"TextArea"
+                                        },
+                                        {   
+                                            title:"Skills: ", 
+                                            value:this.state.skills, 
+                                            ChangeFunction:this.SetSkills, 
+                                            inputClass: "user-info-form",
+                                            inputType:"TextArea"
+                                        },
+                                        {   
+                                            title:"Joined: ", 
+                                            value:this.props.userInfo.joined,
+                                            inputType:"static"
+                                        },
+                                        {   
+                                            title:"Birthday: ", 
+                                            value:this.state.birthday, 
+                                            ChangeFunction:this.SetBirthday, 
+                                            type:"date",
+                                            inputType:"TextInput"
+                                        },
+                                        {   
+                                            title:"Emoji: ", 
+                                            value:this.state.emoji, 
+                                            ChangeFunction:this.SetEmoji,
+                                            inputType:"TextInput"
+                                        }
+                                    ]}
+                                />
+                            </CardContent>
+                        </CardContent>
                         <div class = "button-row">
                             <ActionButton
                                 text = "Save and Close"
@@ -193,10 +172,9 @@ export class UserInfo extends Component{
                                 ClickFunction = {this.SaveAndClose}
                             />
                         </div>
-                        
                     </div>
-                </div>
-                {this.state.confirmDialogueActive&&<CardDialogue cardClass="float" id="user-info-confirm-close">
+                </Card>
+                {this.state.confirmDialogueActive&&<Card cardClass="dialogue float" id="user-info-confirm-close" titlebar = {false}>
                     <div>Are you sure you want to close? You have unsaved changes!</div>
                     <div>
                         <ActionButton
@@ -213,7 +191,7 @@ export class UserInfo extends Component{
                             ClickFunction = {this.CloseConfirmDialogue}
                         />
                     </div>
-                </CardDialogue>}
+                </Card>}
             </div>
     	)
   	}
