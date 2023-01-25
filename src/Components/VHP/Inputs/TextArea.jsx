@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export class TextInput extends Component {
+export class TextArea extends Component {
     constructor(props) {
         super(props)
 
         if (props.inputClass) {
-            this.inputClass = "text-input" + ' ' + this.props.inputClass
+            this.inputClass = "text-area" + ' ' + this.props.inputClass
         } else {
-            this.inputClass = 'text-input'
+            this.inputClass = 'text-area'
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -23,7 +23,7 @@ export class TextInput extends Component {
 
     render() {
         return(
-            <input 
+            <textarea 
                 onChange = {this.handleChange} 
                 className = {this.inputClass}
                 id = {this.props.id}

@@ -45,6 +45,7 @@ export class VHPapp extends Component{
     
     	this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.SetUserForm = this.SetUserForm.bind(this)
+		this.SetUserInfo = this.SetUserInfo.bind(this)
   	}
 
 	/**
@@ -72,6 +73,7 @@ export class VHPapp extends Component{
 					user={this.state.config.user} 
 					ValidateLogin={this.ValidateLogin}
 					SetUserForm = {this.SetUserForm}
+					SetUserInfo = {this.SetUserInfo}
 				/>
 			)
 		} else {
@@ -79,6 +81,15 @@ export class VHPapp extends Component{
 				false
 			)
 		}
+	}
+
+	/**
+	 * Takes the state provided by the UserInfo form and updates this.state.
+	 * TODO: Add user info to this.state user object
+	 * @param {UserInfo} data 
+	 */
+	SetUserInfo(data) {
+		console.log("Saving to user: ", data)
 	}
 
 	/**
