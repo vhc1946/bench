@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import {LogIO} from './UserLogIO';
 import {ToolBar} from './ToolBar';
 
+import {MergeObject}from '../../cbin/vhp-tools';
+
 /* APP BOX
 
   The App Box can supply every Compont / functionality used by every / most / some
@@ -45,14 +47,12 @@ export class VHPapp extends Component{
   }
 
   toolBar(){return(<ToolBar {...this.state.config.tb}/>)}//deliver TitleBar
-  OClogIO(ele){
-    let c = {
-      tb:{...this.state.config.tb},
-      user:{...this.state.config.user}
-    }
-    c.user.active=false;
-    this.setState({config:c});
+
+  OClogIO(data){
+    //console.log(MergeObject(this.state.config,'user',{active:false}));
+    this.setState(MergeObject(this.state,'user',{active:false}));
   }
+
   userLogIO(){
     if(this.state.config.user.active){
       return(<LogIO user={this.state.config.user} clickFun={this.OClogIO}/>)//deliver UserView
