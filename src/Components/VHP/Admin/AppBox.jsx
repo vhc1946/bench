@@ -4,6 +4,8 @@ import {LogIO} from './UserForm/UserLogIO';
 import {ToolBar} from './ToolBar';
 
 import {MergeObject} from '../../../bin/vhp-tools';
+
+import {SENDrequest} from '../../../bin/vapi/vapicore.js';
 /* APP BOX
 
   The App Box can supply every Compont / functionality used by every / most / some
@@ -42,7 +44,11 @@ export class VHPapp extends Component{
 			settings:{
 
 			}
+
 		}
+			SENDrequest({msg:'hello'},'STORE').then(
+				response=>{console.log(response);}
+			)
 
     	this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.SetUserForm = this.SetUserForm.bind(this)
@@ -87,7 +93,7 @@ export class VHPapp extends Component{
 	/**
 	 * Takes the state provided by the UserInfo form and updates this.state.
 	 * TODO: Add user info to this.state user object
-	 * @param {UserInfo} data 
+	 * @param {UserInfo} data
 	 */
 	SetUserInfo(data) {
 		console.log("Saving to user: ", data)
