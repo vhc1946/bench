@@ -4,8 +4,7 @@ import { TextInput } from '../Inputs/TextInput';
 
 /**
  * A React fragment which takes data and returns it in a dynamic form with inputs.
- * TODO: Add support for ActionButtons somehow - maybe "extend" the form?
- * TODO: Support for static form options in an input form
+ * TODO: Add support for ActionButtons - have an ActionButton input type
  * formdata :  [
  *                  {
  *                      value: displayed text
@@ -32,6 +31,7 @@ export class InputForm extends Component {
 					value = {inputData.value}
 					ChangeFunction = {inputData.ChangeFunction}
 					type = {inputData.type || 'text'}
+					key = {inputData.title}
 				/>
 			)
 		} else if (inputData.inputType == "TextArea") {
@@ -40,6 +40,7 @@ export class InputForm extends Component {
 					value = {inputData.value}
 					ChangeFunction = {inputData.ChangeFunction}
 					inputClass = {inputData.inputClass}
+					key = {inputData.title}
 				/>
 			)
 		} else {
