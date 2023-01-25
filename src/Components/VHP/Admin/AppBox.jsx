@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {LogIO} from './UserForm/UserLogIO';
 import {ToolBar} from './ToolBar';
 
+import {MergeObject} from '../../../bin/vhp-tools';
 /* APP BOX
 
   The App Box can supply every Compont / functionality used by every / most / some
@@ -42,7 +43,7 @@ export class VHPapp extends Component{
 
 			}
 		}
-    
+
     	this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.SetUserForm = this.SetUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
@@ -54,7 +55,7 @@ export class VHPapp extends Component{
 	 */
 	toolBar() {
 		return (
-			<ToolBar 
+			<ToolBar
 				{...this.props.config.tb}
 				user = {this.state.config.user}
 				SetUserForm = {this.SetUserForm}
@@ -69,8 +70,8 @@ export class VHPapp extends Component{
 	userLogIO(){
 		if (this.state.config.user.active) {
 			return (
-				<LogIO 
-					user={this.state.config.user} 
+				<LogIO
+					user={this.state.config.user}
 					ValidateLogin={this.ValidateLogin}
 					SetUserForm = {this.SetUserForm}
 					SetUserInfo = {this.SetUserInfo}
@@ -100,18 +101,9 @@ export class VHPapp extends Component{
 	 */
   	ValidateLogin(data) {
     	if (data.name == "VOGCH" && data.password == "vogel123") {
-      		//Create the new config
-      		let c = {
-        		tb:{...this.state.config.tb},
-        		user:{...this.state.config.user}
-      		}
-      		c.user.active = false;
-			c.user.loggedIn = true;
-      		this.setState({
-        		config:c
-      		})
+				this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
     	}
- 	}
+ 		}
 
 	/**
 	 * Displays or hides the login form. We could likely combine this with ValidateLogin, as we would
@@ -124,9 +116,7 @@ export class VHPapp extends Component{
 		}
 		c.user.active = !c.user.active;
 		c.user.loggedIn = true;
-		  this.setState({
-			config:c
-		})
+		  this.setState(MergeObject(this.state,'user',{active:!this.state.config.user.active,loggedIn:true}))
 	}
 
 
