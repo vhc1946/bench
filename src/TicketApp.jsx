@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { ServiceItemsContainer } from '../Ticket/ServiceItemsContainer';
-import { TicketInfoContainer } from '../Ticket/TicketInfoContainer';
-import { MenuTabBar } from './VHP/ViewControllers/MenuTabBar';
+import { ServiceItemsContainer } from './Ticket/ServiceItemsContainer'
+import { TicketInfoContainer } from './Ticket/TicketInfoContainer';
+import { MenuTabBar } from './Components/VHP/ViewControllers/MenuTabBar';
 
 /**
  * Starter class for a main container. This sits below the title bar and tracks the current view
  * and all open containers
  * Containers are dynamically generated from props.
  */
-export class MainContainer extends Component {
+export class TicketApp extends Component {
     constructor(props) {
         super(props)
 
