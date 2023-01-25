@@ -11,6 +11,6 @@ export var UserData = {
     interests:"Ownership, chips",
     skills:"microsoft word",
     joined:"tomorrow",
-    birthday:"always",
+    birthday:"2023-01-11",
     emoji:"💦"
 }

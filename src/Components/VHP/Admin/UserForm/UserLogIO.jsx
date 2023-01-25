@@ -13,8 +13,9 @@ export class LogIO extends Component{
 		if (this.props.user.loggedIn == true) {
 			return <UserInfo 
 					user={this.props.user}
-					SetUserForm = {this.props.SetUserForm}
+					ToggleUserForm = {this.props.ToggleUserForm}
 					SetUserInfo = {this.props.SetUserInfo}
+					LogUserOut = {this.props.LogUserOut}
 				/>
 		} else {
 			return <LoginForm 

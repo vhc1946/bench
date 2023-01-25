@@ -26,7 +26,6 @@ export class VHPapp extends Component{
 
     	//tools to seperate the state from App's
     	//things in the tool box are public to the rest of the App
-		//TODO: Remove duplicate state, either in Tool Bar or here
     	this.state = {
 			config:{
 				tb:{
@@ -48,13 +47,10 @@ export class VHPapp extends Component{
 		}
 
     	this.ValidateLogin = this.ValidateLogin.bind(this)
-		this.SetUserForm = this.SetUserForm.bind(this)
+		this.ToggleUserForm = this.ToggleUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
+		this.LogUserOut = this.LogUserOut.bind(this)
   	}
-
-	componentDidUpdate() {
-		console.log(this.state)
-	}
 
 	/**
 	 * Deliver tool bar using provided configuration
@@ -65,7 +61,7 @@ export class VHPapp extends Component{
 			<ToolBar
 				{...this.props.config.tb}
 				user = {this.state.config.user}
-				SetUserForm = {this.SetUserForm}
+				ToggleUserForm = {this.ToggleUserForm}
 			/>
 		)
 	}
@@ -81,8 +77,9 @@ export class VHPapp extends Component{
 					user={this.state.config.user}
 					userInfo = {this.state.userInfo}
 					ValidateLogin={this.ValidateLogin}
-					SetUserForm = {this.SetUserForm}
+					ToggleUserForm = {this.ToggleUserForm}
 					SetUserInfo = {this.SetUserInfo}
+					LogUserOut = {this.LogUserOut}
 				/>
 			)
 		} else {
@@ -92,6 +89,10 @@ export class VHPapp extends Component{
 		}
 	}
 
+	LogUserOut(){
+		this.setState(MergeObject(this.state,'user',{loggedIn:false, active:true}))
+	}
+
 	/**
 	 * Takes the state provided by the UserInfo form and updates this.state, then hides the user form
 	 * @param {UserInfo} data 
@@ -99,7 +100,7 @@ export class VHPapp extends Component{
 	SetUserInfo(data) {
 		let retval = MergeObject(this.state, 'userInfo', data)
 		this.setState(retval, () => 
-    	this.SetUserForm());
+    	this.ToggleUserForm());
 	}
 
 	/**
@@ -118,7 +119,7 @@ export class VHPapp extends Component{
 	 * Displays or hides the login form. We could likely combine this with ValidateLogin, as we would
 	 * want the user info before displaying the form anyway
 	 */
-	SetUserForm() {
+	ToggleUserForm() {
 		this.setState(MergeObject(this.state,'user',{active:!this.state.config.user.active,loggedIn:true}))
 	}
 

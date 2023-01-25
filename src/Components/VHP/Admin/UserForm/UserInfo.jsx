@@ -8,6 +8,7 @@ import { CardContent } from '../../Cards/CardContent';
 import { StaticForm } from '../../Forms/StaticForm';
 import { InputForm } from '../../Forms/InputForm';
 import { FloatContainer } from '../../Containers/FloatContainer';
+import { ActionRow } from '../../Tables/DataTable/ActionRow';
 
 export class UserInfo extends Component{
 	constructor(props){
@@ -28,7 +29,8 @@ export class UserInfo extends Component{
             skills: props.user.userInfo.skills,
             birthday:props.user.userInfo.birthday,
             emoji:props.user.userInfo.emoji,
-            confirmDialogueActive:this.state.confirmDialogueActive
+            confirmDialogueActive:this.state.confirmDialogueActive,
+            logoutDialogueActive:this.state.logoutDialogueActive
         }
 
         this.SetInterests = this.SetInterests.bind(this)
@@ -39,6 +41,11 @@ export class UserInfo extends Component{
         this.ConfirmCloseBeforeSave = this.ConfirmCloseBeforeSave.bind(this)
         this.CloseConfirmDialogue = this.CloseConfirmDialogue.bind(this)
         this.SaveAndClose = this.SaveAndClose.bind(this)
+
+        this.ConfirmLogoutBeforeSave = this.ConfirmLogoutBeforeSave.bind(this)
+        this.CloseLogoutDialogue = this.CloseLogoutDialogue.bind(this)
+
+        this.GetStateChanged = this.GetStateChanged.bind(this)
   	}
 
     /**
@@ -52,13 +59,7 @@ export class UserInfo extends Component{
 
     SetEmoji(Input) {this.setState({emoji:Input})}
 
-    /**
-     * TODO: Dialogue box for confirming close
-     * If not saved and changes have been made, ask the user if they wish to save.
-     * For this, we may need to keep track of state history, and if the current state does not match the saved state, ask if the user wishes to save
-     * Reason for doing this versus just having a bool is that they could make a change, and then change it back to what it was before.
-     */
-    ConfirmCloseBeforeSave() {
+    GetStateChanged() {
         let StateChanged = false;
         for (let key in this.state) {
             if (this.state[key] != this.savedState[key]) {
@@ -68,13 +69,22 @@ export class UserInfo extends Component{
             }
         }
 
+        return StateChanged
+    }
+
+    /**
+     * Dialogue box which confirms if the user wishes to save before closing user form
+     */
+    ConfirmCloseBeforeSave() {
+        let StateChanged = this.GetStateChanged();
+
         //Open the dialogue
         if (StateChanged) {
             this.setState({
                 confirmDialogueActive: true
             })
         } else {
-            this.props.SetUserForm()
+            this.props.ToggleUserForm()
         }
     }
 
@@ -83,7 +93,6 @@ export class UserInfo extends Component{
 
     /**
      * Save the user info, then close all dialogues
-     * TODO: Larger save function
      */
     SaveAndClose() {
         let data = {
@@ -98,11 +107,30 @@ export class UserInfo extends Component{
         }
     }
 
+    /**
+     * Dialogue box which confirms if the user wishes to save before logging out
+     */
+    ConfirmLogoutBeforeSave() {
+        let StateChanged = this.GetStateChanged();
+
+        //Open the dialogue
+        if (StateChanged) {
+            this.setState({
+                logoutDialogueActive: true
+            })
+        } else {
+            this.props.LogUserOut()
+        }
+    }
+
+    //Close the confirm dialogue
+    CloseLogoutDialogue() {this.setState({logoutDialogueActive: false})}
+
   	render(){
     	return(
        		<FloatContainer>
                 <Card cardClass = "card" id="user-info-card" title = "User Information" titlebar = {true} actions = {{minimize: null, close:this.ConfirmCloseBeforeSave}}>
-                    <div class="card-content" id = "user-card-content">
+                    <CardContent id = "user-card-content">
                         <CardContent id="basic-user-info">
                             <div id = "user-fullname">
                                 {this.props.user.userInfo.firstname + ' ' + this.props.user.userInfo.lastname}
@@ -171,32 +199,60 @@ export class UserInfo extends Component{
                                 />
                             </CardContent>
                         </CardContent>
-                        <div class = "button-row">
-                            <ActionButton
-                                text = "Save and Close"
-                                id = "user-info-save"
-                                ClickFunction = {this.SaveAndClose}
-                            />
-                        </div>
-                    </div>
+                        <ActionRow
+                            data = {[
+                                {
+                                    text:"Logout",
+                                    id:"user-logout",
+                                    ClickFunction:this.ConfirmLogoutBeforeSave
+                                },
+                                {
+                                    text:"Save and Close",
+                                    id:"user-info-save",
+                                    ClickFunction:this.SaveAndClose
+                                }
+                            ]}
+                        />
+                    </CardContent>
                 </Card>
                 {this.state.confirmDialogueActive&&<Card cardClass="dialogue float" id="user-info-confirm-close" titlebar = {false}>
                     <div>Are you sure you want to close? You have unsaved changes!</div>
-                    <div>
-                        <ActionButton
-                            text = "Save and Close"
-                            ClickFunction = {this.SaveAndClose}
-                        />
-                        <ActionButton 
-                            text = "Close without saving"
-                            ClickFunction = {this.props.SetUserForm}
-                            id = "close-no-save"
-                        />
-                        <ActionButton 
-                            text = "Go back"
-                            ClickFunction = {this.CloseConfirmDialogue}
-                        />
-                    </div>
+                    <ActionRow
+                        data = {[
+                            {
+                                text:"Save and Close",
+                                id:"close-dialogue-save",
+                                ClickFunction:this.SaveAndClose
+                            },
+                            {
+                                text:"Close without saving",
+                                id:"close-dialogue-nosave",
+                                ClickFunction:this.props.ToggleUserForm
+                            },
+                            {
+                                text:"Go back",
+                                id:"close-dialogue-back",
+                                ClickFunction:this.CloseConfirmDialogue
+                            }
+                        ]}
+                    />
+                </Card>}
+                {this.state.logoutDialogueActive&&<Card cardClass="dialogue float" id="user-info-confirm-logout" titlebar = {false}>
+                    <div>Are you sure you want to logout? You have unsaved changes!</div>
+                    <ActionRow
+                        data = {[
+                            {
+                                text:"Logout without saving",
+                                id:"logout-dialogue-nosave",
+                                ClickFunction:this.props.LogUserOut
+                            },
+                            {
+                                text:"Go back",
+                                id:"logout-dialogue-back",
+                                ClickFunction:this.CloseLogoutDialogue
+                            }
+                        ]}
+                    />
                 </Card>}
             </FloatContainer>
     	)

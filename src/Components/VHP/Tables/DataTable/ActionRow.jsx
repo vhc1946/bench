@@ -1,33 +1,45 @@
 import React, { Component } from 'react';
-import { ActionButton } from '../ActionButton';
-import { Data2 } from '../../TestData2';
-import { SearchBar } from './SearchBar';
+import { ActionButton } from '../../Buttons/ActionButton';
 
+/**
+ * Takes an array of actions and creates a set of Action Buttons
+ * data : [
+ * 		{
+ * 			text 			: string
+ * 			id   			: string
+ * 			ClickFunction 	: function()
+ * 		}
+ * 	]
+ */
 export class ActionRow extends Component {
-    constructor(props) {
-        super(props)
-    }
+	constructor(props) {
+		super(props)
 
-    /**
-     * Returns an Action Row
-     * @returns render object
-    */
-    render() {
-        return(
-            <div className = "actionrow">
-                <ActionButton 
-                    text = {"Update Data"} 
-                    ClickFunction = {this.props.UpdateFunction}
-                    data = {Data2}
-                />
-                <SearchBar
-                    FilterByText = {this.props.FilterByText}
-                />
-                <ActionButton 
-                    text="Close Table" 
-                    ClickFunction = {this.props.CloseFunction}
-                />
-            </div>
-        );
-    }
+		this.MapActionData = this.MapActionData.bind(this)
+	}
+
+	MapActionData() {
+		const data = this.props.data
+		const items = data.map((obj) => 
+			<ActionButton
+				text = {obj.text}
+				id = {obj.id}
+				ClickFunction = {obj.ClickFunction}
+			/>
+		);
+
+		return items
+	}
+
+	/**
+	 * Returns an Action Row
+	 * @returns render object
+	*/
+	render() {
+		return(
+			<div className = "action-row">
+				{this.MapActionData()}
+			</div>
+		);
+	}
 }
