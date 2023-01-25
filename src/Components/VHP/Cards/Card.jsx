@@ -18,7 +18,6 @@ export class Card extends Component {
         } else {
             this.cardClass = 'card'
         }
-		console.log(this.props.titlebar)
     }
 
     render() {

@@ -7,24 +7,27 @@ import { CardTitlebar } from '../../Cards/CardTitlebar';
 import { CardContent } from '../../Cards/CardContent';
 import { StaticForm } from '../../Forms/StaticForm';
 import { InputForm } from '../../Forms/InputForm';
+import { FloatContainer } from '../../Containers/FloatContainer';
 
 export class UserInfo extends Component{
 	constructor(props){
 		super(props);
 
+        console.log(props)
         this.state = {
-            interests: props.userInfo.interests,
-            skills: props.userInfo.skills,
-            birthday:null,
-            emoji:props.userInfo.emoji,
+            interests: props.user.userInfo.interests,
+            skills: props.user.userInfo.skills,
+            birthday:props.user.userInfo.birthday,
+            emoji:props.user.userInfo.emoji,
             confirmDialogueActive:false
         }
 
+        //Create a copy of state so you can track changes
         this.savedState = {
-            interests: props.userInfo.interests,
-            skills: props.userInfo.skills,
-            birthday:null,
-            emoji:props.userInfo.emoji,
+            interests: props.user.userInfo.interests,
+            skills: props.user.userInfo.skills,
+            birthday:props.user.userInfo.birthday,
+            emoji:props.user.userInfo.emoji,
             confirmDialogueActive:this.state.confirmDialogueActive
         }
 
@@ -83,47 +86,50 @@ export class UserInfo extends Component{
      * TODO: Larger save function
      */
     SaveAndClose() {
-        this.props.SetUserInfo(this.state);
+        let data = {
+            interests: this.state.interests,
+            skills: this.state.skills,
+            birthday:this.state.birthday,
+            emoji:this.state.emoji,
+        }
+        this.props.SetUserInfo(data);
         if (this.state.confirmDialogueActive == true) {
             this.CloseConfirmDialogue()
         }
-        this.props.SetUserForm();
     }
 
   	render(){
     	return(
-       		<div className = "float-container">
+       		<FloatContainer>
                 <Card cardClass = "card" id="user-info-card" title = "User Information" titlebar = {true} actions = {{minimize: null, close:this.ConfirmCloseBeforeSave}}>
                     <div class="card-content" id = "user-card-content">
                         <CardContent id="basic-user-info">
                             <div id = "user-fullname">
-                                {this.props.userInfo.firstname + ' ' + this.props.userInfo.lastname}
+                                {this.props.user.userInfo.firstname + ' ' + this.props.user.userInfo.lastname}
                             </div>
                             <div class="user-info-item">
                                 <div id = "user-username">
-                                    {this.props.userInfo.username}
+                                    {this.props.user.userInfo.username}
                                 </div>
                                 <div style={{fontWeight: 600}}> - </div>
                                 <div id = "user-usertitle">
-                                    {this.props.userInfo.title}
+                                    {this.props.user.userInfo.title}
                                 </div>
                             </div>
                         </CardContent>
-                        
                         <CardContent id="job-info">
                             <CardTitlebar title = "Job Information" cardTitlebarClass = "job-card-title"/>
                             <CardContent id = "job-info-contents">
-                                <StaticForm
+                                <InputForm
                                     formdata = {[
-                                        {title:"Job Type: ", value:this.props.userInfo.jobtype},
-                                        {title:"Department: ", value:this.props.userInfo.dept},
-                                        {title:"Reports To: ", value:this.props.userInfo.reportto},
-                                        {title:"Job Description: ", value:this.props.userInfo.jobdescr}
+                                        {title:"Job Type: ", value:this.props.user.userInfo.jobtype},
+                                        {title:"Department: ", value:this.props.user.userInfo.dept},
+                                        {title:"Reports To: ", value:this.props.user.userInfo.reportto},
+                                        {title:"Job Description: ", value:this.props.user.userInfo.jobdescr}
                                     ]}
                                 />
                             </CardContent>
                         </CardContent>
-
                         <CardContent id="personal-info">
                             <CardTitlebar title = "Personal Information" cardTitlebarClass = "personal-card-title"/>
                             <CardContent id = "personal-info-contents">
@@ -145,7 +151,7 @@ export class UserInfo extends Component{
                                         },
                                         {   
                                             title:"Joined: ", 
-                                            value:this.props.userInfo.joined,
+                                            value:this.props.user.userInfo.joined,
                                             inputType:"static"
                                         },
                                         {   
@@ -192,7 +198,7 @@ export class UserInfo extends Component{
                         />
                     </div>
                 </Card>}
-            </div>
+            </FloatContainer>
     	)
   	}
 }

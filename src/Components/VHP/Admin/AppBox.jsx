@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import {LogIO} from './UserForm/UserLogIO';
 import {ToolBar} from './ToolBar';
+import { UserData } from '../../../Data/UserData'
 
 import {MergeObject} from '../../../bin/vhp-tools';
 
@@ -39,7 +40,8 @@ export class VHPapp extends Component{
 					active:true,
 					name:'VOGCH',
 					pswrd:'vogel123',
-					loggedIn:false
+					loggedIn:false,
+					userInfo:UserData
 				}
 			},
 			settings:{
@@ -83,6 +85,7 @@ export class VHPapp extends Component{
 			return (
 				<LogIO
 					user={this.state.config.user}
+					userInfo = {this.state.userInfo}
 					ValidateLogin={this.ValidateLogin}
 					SetUserForm = {this.SetUserForm}
 					SetUserInfo = {this.SetUserInfo}
@@ -101,7 +104,9 @@ export class VHPapp extends Component{
 	 * @param {UserInfo} data
 	 */
 	SetUserInfo(data) {
-		console.log("Saving to user: ", data)
+		let retval = MergeObject(this.state, 'userInfo', data)
+		this.setState(retval, () =>
+    	this.SetUserForm());
 	}
 
 	/**
@@ -122,12 +127,6 @@ export class VHPapp extends Component{
 	 * want the user info before displaying the form anyway
 	 */
 	SetUserForm() {
-		let c = {
-			tb:{...this.state.config.tb},
-			user:{...this.state.config.user}
-		}
-		c.user.active = !c.user.active;
-		c.user.loggedIn = true;
 		this.setState(MergeObject(this.state,'user',{active:!this.state.config.user.active,loggedIn:true}))
 	}
 

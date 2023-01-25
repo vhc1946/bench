@@ -9,7 +9,6 @@ import { MenuTabBar } from '../Components/VHP/ViewControllers/MenuTabBar'
 export class TicketInfoContainer extends Component {
     constructor(props) {
         super(props)
-        console.log(this.props)
         this.state = {
             active: true,
             Containers:[

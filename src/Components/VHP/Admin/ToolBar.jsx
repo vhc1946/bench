@@ -9,7 +9,6 @@ import { LogIO } from './UserForm/UserLogIO';
 export class ToolBar extends Component{
   	constructor(props){
 		super(props);
-		console.log(props)
 		this.state={//
 			qacts:props.qacts||[],
 			macts:props.macts||[],
