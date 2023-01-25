@@ -51,7 +51,7 @@ export class VHPapp extends Component{
 				response=>{console.log(response);}
 			)
 
-    	this.ValidateLogin = this.ValidateLogin.bind(this)
+    this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.SetUserForm = this.SetUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
   	}
@@ -110,10 +110,11 @@ export class VHPapp extends Component{
 	 * in order to notify the user if their credentials are incorrect. Could also do separate state entirel
 	 * @param {*} data : data passed to function
 	 */
-  	ValidateLogin(data) {
-    	if (data.name == "VOGCH" && data.password == "vogel123") {
-			this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
-    	}
+	ValidateLogin(data) {
+		SENDrequest({})
+  	if (data.name == "VOGCH" && data.password == "vogel123") {
+		this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
+  	}
  	}
 
 	/**
