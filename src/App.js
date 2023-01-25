@@ -32,7 +32,6 @@ import {MainContainer} from './Components/MainContainer'
   }
 }*/
 
-
 class DevApp extends VHPapp{
   constructor(props){
     super(props);
@@ -65,7 +64,6 @@ class DevApp extends VHPapp{
     }
   }
 }
-
 
 var configdefault = {
   tb:{
