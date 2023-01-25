@@ -5,6 +5,8 @@ import {ToolBar} from './ToolBar';
 import { UserData } from '../../../Data/UserData'
 
 import {MergeObject} from '../../../bin/vhp-tools';
+
+import {SENDrequest} from '../../../bin/vapi/vapicore.js';
 /* APP BOX
 
   The App Box can supply every Compont / functionality used by every / most / some
@@ -44,9 +46,13 @@ export class VHPapp extends Component{
 			settings:{
 
 			}
-		}
 
-    	this.ValidateLogin = this.ValidateLogin.bind(this)
+		}
+			SENDrequest({msg:'hello'},'STORE').then(
+				response=>{console.log(response);}
+			)
+
+    this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.ToggleUserForm = this.ToggleUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
 		this.LogUserOut = this.LogUserOut.bind(this)
@@ -94,13 +100,14 @@ export class VHPapp extends Component{
 	}
 
 	/**
-	 * Takes the state provided by the UserInfo form and updates this.state, then hides the user form
-	 * @param {UserInfo} data 
+	 * Takes the state provided by the UserInfo form and updates this.state.
+	 * TODO: Add user info to this.state user object
+	 * @param {UserInfo} data
 	 */
 	SetUserInfo(data) {
 		let retval = MergeObject(this.state, 'userInfo', data)
 		this.setState(retval, () => 
-    	this.ToggleUserForm());
+    	this.SetUserForm());
 	}
 
 	/**
@@ -109,10 +116,11 @@ export class VHPapp extends Component{
 	 * in order to notify the user if their credentials are incorrect. Could also do separate state entirel
 	 * @param {*} data : data passed to function
 	 */
-  	ValidateLogin(data) {
-    	if (data.name == "VOGCH" && data.password == "vogel123") {
-			this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
-    	}
+	ValidateLogin(data) {
+		SENDrequest({})
+  	if (data.name == "VOGCH" && data.password == "vogel123") {
+		this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
+  	}
  	}
 
 	/**
