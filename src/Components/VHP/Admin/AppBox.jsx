@@ -37,6 +37,7 @@ export class VHPapp extends Component{
 					active:true,
 					name:'VOGCH',
 					pswrd:'vogel123',
+					loggedIn:false
 				}
 			},
 			settings:{
@@ -48,6 +49,10 @@ export class VHPapp extends Component{
 		this.SetUserForm = this.SetUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
   	}
+
+	componentDidUpdate() {
+		console.log(this.state)
+	}
 
 	/**
 	 * Deliver tool bar using provided configuration
@@ -101,9 +106,9 @@ export class VHPapp extends Component{
 	 */
   	ValidateLogin(data) {
     	if (data.name == "VOGCH" && data.password == "vogel123") {
-				this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
+			this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
     	}
- 		}
+ 	}
 
 	/**
 	 * Displays or hides the login form. We could likely combine this with ValidateLogin, as we would
@@ -116,7 +121,7 @@ export class VHPapp extends Component{
 		}
 		c.user.active = !c.user.active;
 		c.user.loggedIn = true;
-		  this.setState(MergeObject(this.state,'user',{active:!this.state.config.user.active,loggedIn:true}))
+		this.setState(MergeObject(this.state,'user',{active:!this.state.config.user.active,loggedIn:true}))
 	}
 
 
