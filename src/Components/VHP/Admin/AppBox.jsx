@@ -52,7 +52,7 @@ export class VHPapp extends Component{
 				response=>{console.log(response);}
 			)
 
-    this.ValidateLogin = this.ValidateLogin.bind(this)
+    	this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.ToggleUserForm = this.ToggleUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
 		this.LogUserOut = this.LogUserOut.bind(this)
@@ -107,7 +107,7 @@ export class VHPapp extends Component{
 	SetUserInfo(data) {
 		let retval = MergeObject(this.state, 'userInfo', data)
 		this.setState(retval, () => 
-    	this.SetUserForm());
+    	this.ToggleUserForm());
 	}
 
 	/**
