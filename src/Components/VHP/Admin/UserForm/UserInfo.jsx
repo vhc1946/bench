@@ -14,13 +14,13 @@ export class UserInfo extends Component{
 	constructor(props){
 		super(props);
 
-        console.log(props)
         this.state = {
             interests: props.user.userInfo.interests,
             skills: props.user.userInfo.skills,
             birthday:props.user.userInfo.birthday,
             emoji:props.user.userInfo.emoji,
-            confirmDialogueActive:false
+            confirmDialogueActive:false,
+            logoutDialogueActive:false
         }
 
         //Create a copy of state so you can track changes
@@ -38,14 +38,9 @@ export class UserInfo extends Component{
         this.SetBirthday = this.SetBirthday.bind(this)
         this.SetEmoji = this.SetEmoji.bind(this)
 
-        this.ConfirmCloseBeforeSave = this.ConfirmCloseBeforeSave.bind(this)
-        this.CloseConfirmDialogue = this.CloseConfirmDialogue.bind(this)
+        this.ConfirmSaveDialogue = this.ConfirmSaveDialogue.bind(this)
+        this.CloseDialogue = this.CloseDialogue.bind(this)
         this.SaveAndClose = this.SaveAndClose.bind(this)
-
-        this.ConfirmLogoutBeforeSave = this.ConfirmLogoutBeforeSave.bind(this)
-        this.CloseLogoutDialogue = this.CloseLogoutDialogue.bind(this)
-
-        this.GetStateChanged = this.GetStateChanged.bind(this)
   	}
 
     /**
@@ -59,7 +54,10 @@ export class UserInfo extends Component{
 
     SetEmoji(Input) {this.setState({emoji:Input})}
 
-    GetStateChanged() {
+    /**
+     * Dialogue box which confirms if the user wishes to save before running function
+     */
+    ConfirmSaveDialogue(data) {
         let StateChanged = false;
         for (let key in this.state) {
             if (this.state[key] != this.savedState[key]) {
@@ -69,27 +67,18 @@ export class UserInfo extends Component{
             }
         }
 
-        return StateChanged
-    }
-
-    /**
-     * Dialogue box which confirms if the user wishes to save before closing user form
-     */
-    ConfirmCloseBeforeSave() {
-        let StateChanged = this.GetStateChanged();
-
         //Open the dialogue
         if (StateChanged) {
             this.setState({
-                confirmDialogueActive: true
+                [data.key]: true
             })
         } else {
-            this.props.ToggleUserForm()
+            data.function()
         }
     }
 
-    //Close the confirm dialogue
-    CloseConfirmDialogue() {this.setState({confirmDialogueActive: false})}
+    //Close the dialogue
+    CloseDialogue(key) {this.setState({[key]: false})}
 
     /**
      * Save the user info, then close all dialogues
@@ -102,34 +91,19 @@ export class UserInfo extends Component{
             emoji:this.state.emoji,
         }
         this.props.SetUserInfo(data);
-        if (this.state.confirmDialogueActive == true) {
-            this.CloseConfirmDialogue()
-        }
     }
-
-    /**
-     * Dialogue box which confirms if the user wishes to save before logging out
-     */
-    ConfirmLogoutBeforeSave() {
-        let StateChanged = this.GetStateChanged();
-
-        //Open the dialogue
-        if (StateChanged) {
-            this.setState({
-                logoutDialogueActive: true
-            })
-        } else {
-            this.props.LogUserOut()
-        }
-    }
-
-    //Close the confirm dialogue
-    CloseLogoutDialogue() {this.setState({logoutDialogueActive: false})}
 
   	render(){
     	return(
        		<FloatContainer>
-                <Card cardClass = "card" id="user-info-card" title = "User Information" titlebar = {true} actions = {{minimize: null, close:this.ConfirmCloseBeforeSave}}>
+                <Card 
+                    cardClass = "card" 
+                    id="user-info-card" 
+                    title = "User Information" 
+                    titlebar = {true} 
+                    actions = {{minimize: null, close:this.ConfirmSaveDialogue}}
+                    data = {{minimize:null, close:{key: "confirmDialogueActive", function:this.props.ToggleUserForm}}}
+                    >
                     <CardContent id = "user-card-content">
                         <CardContent id="basic-user-info">
                             <div id = "user-fullname">
@@ -204,7 +178,11 @@ export class UserInfo extends Component{
                                 {
                                     text:"Logout",
                                     id:"user-logout",
-                                    ClickFunction:this.ConfirmLogoutBeforeSave
+                                    ClickFunction:this.ConfirmSaveDialogue,
+                                    data:{
+                                        key:"logoutDialogueActive",
+                                        function:this.props.LogUserOut
+                                    }
                                 },
                                 {
                                     text:"Save and Close",
@@ -232,7 +210,8 @@ export class UserInfo extends Component{
                             {
                                 text:"Go back",
                                 id:"close-dialogue-back",
-                                ClickFunction:this.CloseConfirmDialogue
+                                ClickFunction:this.CloseDialogue,
+                                data:"confirmDialogueActive"
                             }
                         ]}
                     />
@@ -249,7 +228,8 @@ export class UserInfo extends Component{
                             {
                                 text:"Go back",
                                 id:"logout-dialogue-back",
-                                ClickFunction:this.CloseLogoutDialogue
+                                ClickFunction:this.CloseDialogue,
+                                data:"logoutDialogueActive"
                             }
                         ]}
                     />

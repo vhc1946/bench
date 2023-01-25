@@ -25,6 +25,7 @@ export class ActionRow extends Component {
 				text = {obj.text}
 				id = {obj.id}
 				ClickFunction = {obj.ClickFunction}
+				data = {obj.data}
 			/>
 		);
 
