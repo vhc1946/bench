@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DropDown } from '../Dropdowns/DropDown';
 import { TextArea } from '../Inputs/TextArea';
 import { TextInput } from '../Inputs/TextInput';
 
@@ -41,6 +42,13 @@ export class InputForm extends Component {
 					ChangeFunction = {inputData.ChangeFunction}
 					inputClass = {inputData.inputClass}
 					key = {inputData.title}
+				/>
+			)
+		} else if (inputData.inputType == "DropDown"){
+			return (
+				<DropDown 
+					list={inputData.list} 
+					selected={inputData.selected}
 				/>
 			)
 		} else {

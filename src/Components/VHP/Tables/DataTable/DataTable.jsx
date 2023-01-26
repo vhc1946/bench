@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ActionRow } from './ActionRow';
 import { TableRow } from './TableRow';
+import { Card } from '../../Cards/Card';
+import { CardContent } from '../../Cards/CardContent';
 
 export class DataTable extends Component {
     constructor(props) {
@@ -8,6 +10,8 @@ export class DataTable extends Component {
 
         this.id = props.id;
         this.FilterByText = this.FilterByText.bind(this)
+
+        this.staticData = JSON.parse(JSON.stringify(this.props.data));
     }
 
     /**
@@ -15,20 +19,21 @@ export class DataTable extends Component {
      * May move this into the search bar itself
      * @param {event} e : JS change event passed from Search Bar
      */
-    FilterByText(e) {
+    FilterByText(e, searchKey) {
         let newData = null;
+        console.log("SEARCH TERM:", e.target.value)
         if (e.target.value == "") {
             newData = null
         } else {
             newData = []
-            for (let obj in this.props.data) {
+            for (let obj in this.staticData) {
                 //Search through the properties of each object
-                for (let key in this.props.data[obj]) {
-                    //console.log(key, this.props.data[obj][key])
-                    if (this.props.data[obj][key].includes(e.target.value.toLowerCase())) {
-                        //console.log(this.props.data[obj][key], " MATCHES")
-                        newData.push(JSON.parse(JSON.stringify(this.props.data[obj]))) //Push clone of object to new array
-                        break;
+                for (let key in this.staticData[obj]) {
+                    if (key == searchKey || searchKey == undefined) {
+                        if (this.staticData[obj][key].toLowerCase().includes(e.target.value.toLowerCase())) {
+                            newData.push(JSON.parse(JSON.stringify(this.staticData[obj]))) //Push clone of object to new array
+                            break;
+                        }
                     }
                 }
             }
@@ -45,7 +50,7 @@ export class DataTable extends Component {
             return null
         } else {
             return(
-                <div className = "container" id = {this.id}>
+                <Card id = {this.id} cardClass = "data-table">
                     <ActionRow 
                         data = {[
                             {
@@ -67,12 +72,18 @@ export class DataTable extends Component {
                             }
                         ]}
                     />
-                    {this.props.data.map((val, key) => {
-                        return (
-                            <TableRow key = {key} data={val}></TableRow>
-                        )
-                    })}
-                </div>
+                    <TableRow 
+                        data = {this.props.headers}
+                    />
+                    <CardContent cardContentClass = "data-table">
+                        {this.props.data.map((val, key) => {
+                            return (
+                                <TableRow key = {key} data={val}></TableRow>
+                            )
+                        })}
+                    </CardContent>
+                    
+                </Card>
             );
         }
     }

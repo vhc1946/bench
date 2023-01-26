@@ -34,6 +34,7 @@ export class ActionRow extends Component {
 				return(<SearchBar
                     FilterByText = {obj.FilterByText}
 					placeholder = {obj.placeholder}
+					searchKey = {obj.searchKey}
                 />)
 			}
 		}

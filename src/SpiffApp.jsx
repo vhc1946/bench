@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { DropDown } from './Components/VHP/Dropdowns/DropDown';
 import { TableContainer } from './Components/VHP/Tables/DataTable/TableContainer';
 import { MenuTabBar } from './Components/VHP/ViewControllers/MenuTabBar';
 import {TestData} from './Data/TestData'
+import { Droplist } from './Data/Droplist';
 
 /**
  * Starter class for a main container. This sits below the title bar and tracks the current view
@@ -15,11 +17,13 @@ export class SpiffApp extends Component {
         this.state = {
             active: true,
             Containers:[
-                <div style={{top:"180px", position:"absolute"}}>
-                    Open
+                <div style={{top:"60px", position:"absolute"}}>
                     <TableContainer data = {TestData}/>
                 </div>,
-                <div style={{top:"180px", position:"absolute"}}>Active</div>,
+                <div style={{top:"180px", left:"200px", position:"absolute"}}>
+                    Active
+                    <DropDown list={Droplist} selected={{text:"Select option", value:null}} searchable={true}/>
+                </div>,
                 <div style={{top:"180px", position:"absolute"}}>Closed</div>
             ],
             currentTab:0
