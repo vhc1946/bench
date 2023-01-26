@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { TableContainer } from './Components/VHP/Tables/DataTable/TableContainer';
 import { MenuTabBar } from './Components/VHP/ViewControllers/MenuTabBar';
+import {TestData} from './Data/TestData'
 
 /**
  * Starter class for a main container. This sits below the title bar and tracks the current view
@@ -13,7 +15,10 @@ export class SpiffApp extends Component {
         this.state = {
             active: true,
             Containers:[
-                <div style={{top:"180px", position:"absolute"}}>Open</div>,
+                <div style={{top:"180px", position:"absolute"}}>
+                    Open
+                    <TableContainer data = {TestData}/>
+                </div>,
                 <div style={{top:"180px", position:"absolute"}}>Active</div>,
                 <div style={{top:"180px", position:"absolute"}}>Closed</div>
             ],

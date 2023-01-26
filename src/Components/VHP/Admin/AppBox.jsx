@@ -38,8 +38,8 @@ export class VHPapp extends Component{
 				},
 				user:{
 					active:true,
-					name:'VOGCH',
-					pswrd:'vogel123',
+					name:'',
+					pswrd:'',
 					loggedIn:false,
 					userInfo:UserData
 				}
@@ -54,7 +54,7 @@ export class VHPapp extends Component{
 		this.SetUserInfo = this.SetUserInfo.bind(this)
 		this.LogUserOut = this.LogUserOut.bind(this)
   	}
-	}
+	
 	
 	componentDidMount(){
 		this.ValidateLogin({//validate passed config

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActionButton } from '../VHP/ActionButton';
+import { ActionButton } from '../../Buttons/ActionButton';
 import { DataTable } from './DataTable';
 
 export class TableContainer extends Component {

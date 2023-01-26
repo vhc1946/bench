@@ -26,7 +26,7 @@ export class DataTable extends Component {
                 for (let key in this.props.data[obj]) {
                     //console.log(key, this.props.data[obj][key])
                     if (this.props.data[obj][key].includes(e.target.value.toLowerCase())) {
-                        console.log(this.props.data[obj][key], " MATCHES")
+                        //console.log(this.props.data[obj][key], " MATCHES")
                         newData.push(JSON.parse(JSON.stringify(this.props.data[obj]))) //Push clone of object to new array
                         break;
                     }
@@ -47,9 +47,25 @@ export class DataTable extends Component {
             return(
                 <div className = "container" id = {this.id}>
                     <ActionRow 
-                        CloseFunction = {this.props.ToggleTable}
-                        UpdateFunction = {this.props.UpdateData}
-                        FilterByText = {this.FilterByText}
+                        data = {[
+                            {
+                                text:"Update Data",
+                                id:"repair-update-data",
+                                ClickFunction:this.props.UpdateData,
+                                type:"ActionButton"
+                            },
+                            {
+                                text:"Close Table",
+                                id:"repair-close-table",
+                                ClickFunction:this.props.ToggleTable,
+                                type:"ActionButton"
+                            },
+                            {
+                                id:"repair-search-data",
+                                FilterByText:this.FilterByText,
+                                type:"SearchBar"
+                            }
+                        ]}
                     />
                     {this.props.data.map((val, key) => {
                         return (

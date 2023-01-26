@@ -16,15 +16,13 @@ export class SearchBar extends Component {
 
     render() {
         return(
-            <div>
-                <input 
-                    onChange = {this.props.FilterByText} 
-                    className = "Search-Bar" 
-                    tag={this.props.tag}
-                    id = {this.props.id}>
-                        {this.props.text}
-                </input>
-            </div>
+            <input 
+                onChange = {this.handleChange} 
+                className = "Search-Bar" 
+                tag={this.props.tag}
+                id = {this.props.id}>
+                    {this.props.text}
+            </input>
         );
     }
 }
