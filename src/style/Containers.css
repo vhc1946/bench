@@ -65,6 +65,8 @@
 .text-area {
     min-width: 100px;
     min-height: 50px;
+    max-width: 50vw;
+    max-height: 100px;
 }
 
 /*User info card customizations*/
@@ -122,12 +124,13 @@
     height: 20%;
 }
 
-.button-row {
+.action-row {
     display: flex;
     justify-content: end;
+    gap: 10px
 }
 
-#user-info-save {
+#user-info-save, #user-logout {
     width: fit-content;
     height: 40px;
     line-height: 40px;
@@ -141,7 +144,17 @@
     cursor: pointer;
 }
 
-#user-info-confirm-close {
+#user-logout {
+    background-color: rgb(50, 64, 191);
+    justify-self: center;
+}
+
+#user-logout:hover {
+    cursor: pointer;
+    background-color: rgb(30, 37, 104);
+}
+
+#user-info-confirm-close, #user-info-confirm-logout {
     min-width: 20vw;
     min-height: 10vh;
     display: grid;
@@ -150,14 +163,14 @@
     justify-self: center;
 }
 
-#user-info-confirm-close>.card-content>div {
+#user-info-confirm-close>.card-content>div, #user-info-confirm-logout>.card-content>div {
     display: flex;
     gap:10px;
     padding: 5px;
     justify-content: center;
 }
 
-#user-info-confirm-close>.card-content>div>.action-button {
+#user-info-confirm-close>.card-content>div>.action-button, #user-info-confirm-logout>.card-content>div>.action-button {
     height: 50px;
     width: 120px;
     line-height: 15px;
@@ -170,7 +183,7 @@
     background-color: var(--included-border)
 }
 
-#user-info-confirm-close>.card-content>div>.action-button:hover {
+#user-info-confirm-close>.card-content>div>.action-button:hover, #user-info-confirm-logout>.card-content>div>.action-button:hover {
     background-color: var(--included-border-hover);
     cursor: pointer;
 }

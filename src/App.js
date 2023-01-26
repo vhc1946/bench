@@ -3,7 +3,9 @@ import './App.css';
 import {VHPapp} from './Components/VHP/Admin/AppBox';
 import React, {Component} from 'react';
 import { Ticket } from './Data/Ticket'
-import {MainContainer} from './Components/MainContainer'
+import {MainApp} from './TicketApp'
+import {SpiffApp} from './SpiffApp'
+import { DockApp } from './DockApp';
 
 
 /* Template App
@@ -42,7 +44,7 @@ class DevApp extends VHPapp{
       <>
         {this.deliverTools()}
         <div>
-          <MainContainer ticket={Ticket}/>
+          <DockApp ticket={Ticket}/>
         </div>
       </>
     )

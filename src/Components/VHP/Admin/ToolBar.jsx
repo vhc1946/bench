@@ -86,7 +86,7 @@ export class ToolBar extends Component{
 				<ActionButton
 					text="User Form"
 					id="user-form-button"
-					ClickFunction = {this.props.SetUserForm}
+					ClickFunction = {this.props.ToggleUserForm}
 				/>
 			</div>
 			</div>

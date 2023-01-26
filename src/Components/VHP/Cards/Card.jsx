@@ -7,6 +7,7 @@ import { CardTitlebar } from './CardTitlebar';
  * Card options:
  * 		titlebar {bool}  : whether a card will display a title bar
  * 		actions {object} : collection of functions which control actions. set to null to hide action button
+ *      data {object}    : collection of data associated with each action
  * 		title {string}   : string title to display in the title bar
  */
 export class Card extends Component {
@@ -23,7 +24,7 @@ export class Card extends Component {
     render() {
         return(
             <div className={this.cardClass} id={this.props.id}>
-				{this.props.titlebar&&<CardTitlebar title={this.props.title} actions = {this.props.actions}/>}
+				{this.props.titlebar&&<CardTitlebar title={this.props.title} actions = {this.props.actions} data = {this.props.data}/>}
 				<CardContent>
 					{this.props.children}
 				</CardContent>

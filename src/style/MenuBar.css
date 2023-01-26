@@ -5,6 +5,13 @@
     bottom: 0px;
 }
 
+.top-bar {
+    width: 100vw;
+    display: flex;
+    position: absolute;
+    top: 40px;
+}
+
 .top-right-bar {
     display: grid;
     direction: ltr;

@@ -49,23 +49,19 @@ export class VHPapp extends Component{
 			}
 		}
 
-    this.ValidateLogin = this.ValidateLogin.bind(this)
-		this.SetUserForm = this.SetUserForm.bind(this)
+    	this.ValidateLogin = this.ValidateLogin.bind(this)
+		this.ToggleUserForm = this.ToggleUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
-
-
-  }
+		this.LogUserOut = this.LogUserOut.bind(this)
+  	}
+	}
+	
 	componentDidMount(){
 		this.ValidateLogin({//validate passed config
 			name:this.state.config.user.name,
 			password:this.state.config.user.pswrd
 		});
 	}
-
-	componentDidUpdate() {
-		console.log(this.state)
-	}
-
 	/**
 	 * Deliver tool bar using provided configuration
 	 * @returns Tool Bar Component
@@ -75,7 +71,7 @@ export class VHPapp extends Component{
 			<ToolBar
 				{...this.props.config.tb}
 				user = {this.state.config.user}
-				SetUserForm = {this.SetUserForm}
+				ToggleUserForm = {this.ToggleUserForm}
 			/>
 		)
 	}
@@ -91,8 +87,9 @@ export class VHPapp extends Component{
 					user={this.state.config.user}
 					userInfo = {this.state.userInfo}
 					ValidateLogin={this.ValidateLogin}
-					SetUserForm = {this.SetUserForm}
+					ToggleUserForm = {this.ToggleUserForm}
 					SetUserInfo = {this.SetUserInfo}
+					LogUserOut = {this.LogUserOut}
 				/>
 			)
 		} else {
@@ -100,6 +97,10 @@ export class VHPapp extends Component{
 				false
 			)
 		}
+	}
+
+	LogUserOut(){
+		this.setState(MergeObject(this.state,'user',{loggedIn:false, active:true}))
 	}
 
 	/**
@@ -110,7 +111,7 @@ export class VHPapp extends Component{
 	SetUserInfo(data) {
 		let retval = MergeObject(this.state, 'userInfo', data)
 		this.setState(retval, () =>
-    	this.SetUserForm());
+    	this.ToggleUserForm());
 	}
 
 	/**
@@ -139,7 +140,7 @@ export class VHPapp extends Component{
 	 * Displays or hides the login form. We could likely combine this with ValidateLogin, as we would
 	 * want the user info before displaying the form anyway
 	 */
-	SetUserForm() {
+	ToggleUserForm() {
 		this.setState(MergeObject(this.state,'user',{active:!this.state.config.user.active,loggedIn:true}))
 	}
 

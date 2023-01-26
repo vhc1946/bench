@@ -43,12 +43,14 @@ export class CardTitlebar extends Component {
                     {this.state.minimize&&<ActionButton 
                         ClickFunction = {this.props.actions.minimize}
                         ButtonType = "minimize-button"
-                        text="X"
+                        text="-"
+                        data = {this.props.data.minimize}
                     />}
                     {this.state.close&&<ActionButton 
                         ClickFunction = {this.props.actions.close}
                         ButtonType = "close-button"
                         text="X"
+                        data = {this.props.data.close}
                     />}
                 </div>
                 

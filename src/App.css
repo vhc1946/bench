@@ -67,6 +67,26 @@
   overflow: hidden;
 }
 
+/*DOCK*/
+.dock {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.dock>.action-button {
+  height: 200px;
+  width: 200px;
+  filter: var(--drop-shadow);
+  background-color: #fff;
+  color:#282c34;
+  line-height: 200px;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
