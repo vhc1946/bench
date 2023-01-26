@@ -31,6 +31,41 @@ export class SpiffApp extends Component {
         
         this.SetTab = this.SetTab.bind(this)
     }
+
+    /**
+	 * Spiff App Functionality:
+	 * 1. Filtering should apply across all tabs, so you can filter on one tab, switch tabs, and it will
+	 * be filtered.
+	 * 2. Buttons on each row expand with options, add support or create an expanded object.
+	 * 
+	 * 
+     * Spiff App Layout:
+     * 	<Header>
+     * 		VOGEL COMMISION LOG
+     * 	</Header>
+	 * 	<CardContent> //Top card
+	 * 		<InputForm>		//Search Form
+	 * 			Search inputs [Tech ID, WO#, Client Name, Refered To, Address, Period(needs custom logic)]
+	 * 		</InputForm>
+	 * 		<StaticForm>
+	 * 			Commission Data
+	 * 		</Static Form>
+	 * 		<Card>
+	 * 			Whatever this card is for, idk
+	 * 		</Card>
+	 * 	</Card Content>
+	 * 	<CardContent>
+	 * 		<MenuTabBar>
+	 * 			Approved, Lost, Open, Closed
+	 * 		</MenuTabBar>
+	 * 		{this.state.Containers[this.state.currentTab]} => {
+	 * 			<Card>
+	 * 				<RowHeader></RowHeader>
+	 * 				<DataTable></DataTable>
+	 * 			</Card>
+	 * 		}
+	 * 	</Card Content>
+     */
     
     /**
      * Changes the state of the menu's current tab

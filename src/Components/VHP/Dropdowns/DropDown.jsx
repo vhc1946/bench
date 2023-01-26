@@ -26,6 +26,7 @@ export class DropDown extends Component {
     /**
      * Filters this.props.data based on the input
      * May move this into the search bar itself
+     * TODO: Move this search function either into the search bar, or to a generic utility file
      * @param {event} e : JS change event passed from Search Bar
      */
     FilterByText(e, searchKey) {
