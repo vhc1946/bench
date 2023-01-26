@@ -1,56 +1,40 @@
 
-export var VAPIhost = 'http://localhost:5000/STORE/';//'https://18.191.134.244:5000/'; //
+export var VAPIhost = 'http://localhost:5000/';//'https://18.191.134.244:5000/'; //
 
-export var SENDrequest = (pack,request='mart',url=VAPIhost)=>{
-  return new Promise((res,rej)=>{
-    let options={
-      method:'POST',
-      headers:{
-        'Accept':'application/json'
-      },
-      body:JSON.stringify({
-        access:{
-          user:'VOGCH',
-          pswrd:'vogel123',
-          coid:'01',
-          request:request
-        },
-        pack:pack
-      })
+/* Pack
+  collect: '' (group of data)
+  store: '' (sub the group)
+  db: '' (actual data)
+  methd: '' (QUERY | REMOVE | INSERT | UPDATE)
+  options: {
+    QUERY:{
+      query:{id:'itemid'}
     }
-    fetch(url,options)
-    .then(response=>{return response.json()})
-    .then(data=>{return res(data);})
-    .catch(err=>{return res(false);})
-  });
+    REMOVE:{
+      query:{id:'itemid'}
+      multi: TRUE | FALSE
+    }
+    UPDATE:{
+      query:{id:'itemid'}
+      update:{$set:item}
+      options:{}
+    }
+    INSERT:{
+      docs: [items] || {item}
+    }
+  }
+
+*/
+export var vapiPack = (method='',opts={})=>{
+  return{
+    collect:'apps',
+    store:'SUMTRACKER',
+    db:'mtracker',
+    method:method,
+    options:opts
+  }
 }
-
-export var SENDrequestapi = (pack,request='mart',url=VAPIhost+'api/')=>{
-  return new Promise((res,rej)=>{
-    console.log(url)
-    let options={
-      method:'POST',
-      headers:{
-        'Accept':'application/json'
-      },
-      body:JSON.stringify({
-        access:{
-          user:'VOGCH',
-          pswrd:'vogel123',
-          coid:'01',
-          request:request
-        },
-        pack:pack
-      })
-    }
-    fetch(url,options)
-    .then(response=>{return response.json()})
-    .then(data=>{return res(data);})
-    .catch(err=>{return res(false);})
-  });
-}
-
-export var SENDrequestadmin = (pack,request='store',url=VAPIhost+'admin/')=>{
+export var SENDrequestapi = (pack,{user='',pswrd='',request=''},route='LOGIN',url=VAPIhost+'API/')=>{
   return new Promise((res,rej)=>{
     let options={
       method:'POST',
@@ -59,15 +43,16 @@ export var SENDrequestadmin = (pack,request='store',url=VAPIhost+'admin/')=>{
       },
       body:JSON.stringify({
         access:{
-          user:'VOGCH',
-          pswrd:'vogel123',
+          user:user,
+          pswrd:pswrd,
           coid:'01',
           request:request
         },
         pack:pack
       })
     }
-    fetch(url,options)
+    console.log(route);
+    fetch(url+route,options)
     .then(response=>{return response.json()})
     .then(data=>{return res(data);})
     .catch(err=>{return res(false);})

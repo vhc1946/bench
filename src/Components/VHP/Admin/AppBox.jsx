@@ -6,7 +6,7 @@ import { UserData } from '../../../Data/UserData'
 
 import {MergeObject} from '../../../bin/vhp-tools';
 
-import {SENDrequest} from '../../../bin/vapi/vapicore.js';
+import {SENDrequestapi} from '../../../bin/vapi/vapicore.js';
 /* APP BOX
 
   The App Box can supply every Compont / functionality used by every / most / some
@@ -29,7 +29,7 @@ export class VHPapp extends Component{
     	//tools to seperate the state from App's
     	//things in the tool box are public to the rest of the App
 		//TODO: Remove duplicate state, either in Tool Bar or here
-    	this.state = {
+  	this.state = {
 			config:{
 				tb:{
 					active:true,
@@ -47,16 +47,20 @@ export class VHPapp extends Component{
 			settings:{
 
 			}
-
 		}
-			SENDrequest({msg:'hello'},'STORE').then(
-				response=>{console.log(response);}
-			)
 
     this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.SetUserForm = this.SetUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
-  	}
+
+
+  }
+	componentDidMount(){
+		this.ValidateLogin({//validate passed config
+			name:this.state.config.user.name,
+			password:this.state.config.user.pswrd
+		});
+	}
 
 	componentDidUpdate() {
 		console.log(this.state)
@@ -116,10 +120,19 @@ export class VHPapp extends Component{
 	 * @param {*} data : data passed to function
 	 */
 	ValidateLogin(data) {
-		SENDrequest({})
-  	if (data.name == "VOGCH" && data.password == "vogel123") {
-		this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//Create the new config
-  	}
+		SENDrequestapi({},{
+			user:data.name,
+			pswrd:data.password
+		},'LOGIN').then(
+			answr=>{
+				console.log(answr);
+				//if(answr.success){// GOOD
+
+					this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//update config
+					//can send back user information as well
+				//}
+			}
+		)
  	}
 
 	/**
