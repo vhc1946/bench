@@ -7,6 +7,12 @@ export class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this)
+
+        if (props.searchClass) {
+            this.searchClass = "search-bar" + " " + props.searchClass
+        } else {
+            this.searchClass = "search-bar"
+        }
     }
 
     /**
@@ -21,7 +27,7 @@ export class SearchBar extends Component {
         return(
             <input 
                 onChange = {this.handleChange} 
-                className = "Search-Bar"
+                className = {this.searchClass}
                 id = {this.props.id}>
             </input>
         );

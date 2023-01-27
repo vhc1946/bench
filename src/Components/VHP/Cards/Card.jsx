@@ -25,7 +25,7 @@ export class Card extends Component {
         return(
             <div className={this.cardClass} id={this.props.id}>
 				{this.props.titlebar&&<CardTitlebar title={this.props.title} actions = {this.props.actions} data = {this.props.data}/>}
-				<CardContent>
+				<CardContent id={this.props.id+"-card-content"}>
 					{this.props.children}
 				</CardContent>
             </div>

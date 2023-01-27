@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { DropDown } from '../Dropdowns/DropDown';
 import { TextArea } from '../Inputs/TextArea';
 import { TextInput } from '../Inputs/TextInput';
+import { SearchBar } from '../Tables/DataTable/SearchBar';
 
 /**
  * A React fragment which takes data and returns it in a dynamic form with inputs.
@@ -51,6 +52,14 @@ export class InputForm extends Component {
 					selected={inputData.selected}
 				/>
 			)
+		} else if (inputData.inputType == "SearchBar") {
+			return (
+				<SearchBar 
+					FilterByText = {inputData.FilterByText}
+					searchKey = {inputData.searchKey}
+					searchClass = {inputData.searchClass}
+				/>
+			)
 		} else {
 			return (
 				<div>{inputData.value}</div>
@@ -61,7 +70,7 @@ export class InputForm extends Component {
     MapFormData() {
         const formdata = this.props.formdata
         const items = formdata.map((obj) => 
-            <div className='user-info-item'>
+            <div className='form-info-item'>
                 <div>{obj.title}</div>
                 {this.GetInput(obj)}
             </div>

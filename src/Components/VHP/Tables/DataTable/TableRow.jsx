@@ -9,7 +9,23 @@ export class TableRow extends Component {
         } else {
             this.rowClass = "tablerow"
         }
+
+        this.MapData = this.MapData.bind(this)
     }
+
+    MapData(keyName) {
+        if (this.props.headers == undefined|| keyName in this.props.headers) {
+            return(
+                <div key = {keyName} className={keyName}>{this.props.data[keyName]}</div>
+            )
+        }
+    }
+
+    /**
+     * {Object.keys(this.props.data).map((keyName, i) => (
+                    <div key = {keyName} className={keyName}>{this.props.data[keyName]}</div>
+                ))}
+     */
 
     /**
      * Returns a row created from props.data
@@ -19,7 +35,7 @@ export class TableRow extends Component {
         return(
             <div className = {this.rowClass} id = {this.props.id}>
                 {Object.keys(this.props.data).map((keyName, i) => (
-                    <div key = {keyName} className={keyName}>{this.props.data[keyName]}</div>
+                    this.MapData(keyName)
                 ))}
             </div>
         );

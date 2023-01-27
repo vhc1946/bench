@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { ActionRow } from './ActionRow';
 import { TableRow } from './TableRow';
-import { Card } from '../../Cards/Card';
 import { CardContent } from '../../Cards/CardContent';
 
 export class DataTable extends Component {
@@ -50,40 +48,16 @@ export class DataTable extends Component {
             return null
         } else {
             return(
-                <Card id = {this.id} cardClass = "data-table">
-                    <ActionRow 
-                        data = {[
-                            {
-                                text:"Update Data",
-                                id:"repair-update-data",
-                                ClickFunction:this.props.UpdateData,
-                                type:"ActionButton"
-                            },
-                            {
-                                text:"Close Table",
-                                id:"repair-close-table",
-                                ClickFunction:this.props.ToggleTable,
-                                type:"ActionButton"
-                            },
-                            {
-                                id:"repair-search-data",
-                                FilterByText:this.FilterByText,
-                                type:"SearchBar"
-                            }
-                        ]}
-                    />
-                    <TableRow 
-                        data = {this.props.headers}
-                    />
+                <>
+                    {this.props.headers&&<TableRow data = {this.props.headers}/>}
                     <CardContent cardContentClass = "data-table">
                         {this.props.data.map((val, key) => {
                             return (
-                                <TableRow key = {key} data={val}></TableRow>
+                                <TableRow key = {key} data={val} headers={this.props.headers}></TableRow>
                             )
                         })}
                     </CardContent>
-                    
-                </Card>
+                </>
             );
         }
     }
