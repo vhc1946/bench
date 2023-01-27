@@ -74,7 +74,7 @@ var configdefault = {
       {
         key:'save',
         id:'wo-save-button',
-        src:'http://vhpportal.com/Tech/bin/repo/assets/icons/disk.png',
+        src:'http://vhpportal.com/repo/assets/icons/disk.png',
         title:'Save WO',
         onClick:(ele)=>{
           console.log('Save Page');
@@ -83,7 +83,7 @@ var configdefault = {
       {
         key:'refresh',
         id:'wo-refresh-button',
-        src:'http://vhpportal.com/Tech/bin/repo/assets/icons/refresh.png',
+        src:'http://vhpportal.com/repo/assets/icons/refresh.png',
         title:'Refresh WO',
         onClick:(ele)=>{   // Refresh info
           console.log('Refresh Page')

@@ -1,5 +1,5 @@
 
-export var VAPIhost = 'http://localhost:5000/';//'https://18.191.134.244:5000/'; //
+export var VAPIhost = 'http://vogel.vhpportal.com/';//'https://localhost:5000/'; //
 
 /* Pack
   collect: '' (group of data)
@@ -34,7 +34,7 @@ export var vapiPack = (method='',opts={})=>{
     options:opts
   }
 }
-export var SENDrequestapi = (pack,{user='',pswrd='',request=''},route='LOGIN',url=VAPIhost+'API/')=>{
+export var SENDrequestapi = (pack,{user='',pswrd='',request=''},route='LOGIN',url=VAPIhost+'api/')=>{
   return new Promise((res,rej)=>{
     let options={
       method:'POST',
@@ -51,7 +51,6 @@ export var SENDrequestapi = (pack,{user='',pswrd='',request=''},route='LOGIN',ur
         pack:pack
       })
     }
-    console.log(route);
     fetch(url+route,options)
     .then(response=>{return response.json()})
     .then(data=>{return res(data);})

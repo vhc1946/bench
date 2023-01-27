@@ -49,13 +49,12 @@ export class VHPapp extends Component{
 			}
 		}
 
-    	this.ValidateLogin = this.ValidateLogin.bind(this)
+    this.ValidateLogin = this.ValidateLogin.bind(this)
 		this.ToggleUserForm = this.ToggleUserForm.bind(this)
 		this.SetUserInfo = this.SetUserInfo.bind(this)
 		this.LogUserOut = this.LogUserOut.bind(this)
-  	}
 	}
-	
+
 	componentDidMount(){
 		this.ValidateLogin({//validate passed config
 			name:this.state.config.user.name,
@@ -121,17 +120,19 @@ export class VHPapp extends Component{
 	 * @param {*} data : data passed to function
 	 */
 	ValidateLogin(data) {
-		SENDrequestapi({},{
+		SENDrequestapi({
+			collect:'apps',
+
+		},{
 			user:data.name,
 			pswrd:data.password
 		},'LOGIN').then(
 			answr=>{
 				console.log(answr);
-				//if(answr.success){// GOOD
-
+				if(answr.success){// GOOD
 					this.setState(MergeObject(this.state,'user',{active:false,loggedIn:true}));//update config
 					//can send back user information as well
-				//}
+				}
 			}
 		)
  	}

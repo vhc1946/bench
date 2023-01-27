@@ -71,10 +71,10 @@ export class ToolBar extends Component{
 		<>
 			<div id='titlebar-cont' className='titlebar'>
 			<div id='titlebar-cont-left'>
-				<img src='http://vhpportal.com/Tech/bin/repo/assets/icons/V-Mark-red.png'
+				<img src='http://vogel.vhpportal.com/repo/assets/icons/V-Mark-red.png'
 					id='titlebar-button-home'
 					className='titlebar-button-action'/>
-				<img src='http://vhpportal.com/Tech/bin/repo/assets/icons/menu-burger.png'
+				<img src='http://vogel.vhpportal.com/repo/assets/icons/menu-burger.png'
 					id='titlebar-button-more'
 					className='titlebar-button-action'
 					onClick={this.ToggleMore}/>
