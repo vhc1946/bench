@@ -196,3 +196,53 @@
     background-color: var(--excluded-border-hover);
     cursor: pointer;
 }
+
+
+/*DROP LIST*/
+.dropdown-option {
+    padding: 5px;
+    cursor: pointer;
+}
+.dropdown-arrow {
+    width: 10px;
+    position: relative;
+    left: 20px;
+}
+
+.dropdown-option:hover {
+    background-color: rgb(141, 62, 62);
+}
+.dropdown-option.selected.default {
+    color: rgb(120,120,120)
+}
+
+.dropdown-option.selected {
+    background-color: var(--card-base-light);
+    outline: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+    z-index: 20;
+    position: relative;
+    color: rgb(0,0,0)
+}
+
+.dropdown-option:hover {
+    background-color: #ccc;
+}
+
+.dropdown-list {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    width: 150px;
+    background-color: var(--card-base-light);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    filter: var(--drop-shadow);
+    position: relative;
+    top: -5px;
+    z-index: 10;
+}
+
+.dropdown-list>.Search-Bar {
+    max-width: 125px;
+}

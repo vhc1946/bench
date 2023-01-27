@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 export class TableRow extends Component {
     constructor(props) {
         super(props)
+
+        if (this.props.rowType == "header") {
+            this.rowClass = "tablerow-header"
+        } else {
+            this.rowClass = "tablerow"
+        }
     }
 
     /**
@@ -11,7 +17,7 @@ export class TableRow extends Component {
      */
     render() {
         return(
-            <div className = "tablerow">
+            <div className = {this.rowClass} id = {this.props.id}>
                 {Object.keys(this.props.data).map((keyName, i) => (
                     <div key = {keyName} className={keyName}>{this.props.data[keyName]}</div>
                 ))}

@@ -1,4 +1,4 @@
-export var Data = [
+export var TestData = [
     {
         pricebook: 'RES',
         task: 'T600977',

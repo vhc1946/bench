@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActionButton } from '../VHP/ActionButton';
+import { ActionButton } from '../../Buttons/ActionButton';
 import { DataTable } from './DataTable';
 
 export class TableContainer extends Component {
@@ -11,7 +11,14 @@ export class TableContainer extends Component {
         this.state = {
             active:false,
             data:props.data||[],
-            filtered:false
+            filtered:false,
+            headers:{
+                pricebook:"Pricebook",
+                task:"Task",
+                descr:"Description",
+                pl:"Pricelevel",
+                price:"Price"
+            }
         }
 
         /**
@@ -66,6 +73,7 @@ export class TableContainer extends Component {
                 <DataTable
                     active = {this.state.active}
                     data = {this.state.data}
+                    headers = {this.state.headers}
                     id = "repair-table-cont"
                     ToggleTable = {this.ToggleTable}
                     UpdateData = {this.UpdateData}

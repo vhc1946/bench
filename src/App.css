@@ -42,12 +42,18 @@
   width: 100vw;
 }
 
-#repair-table-cont {
+#repair-table-cont.card {
   background-color: darksalmon;
   position: absolute;
+  min-height: 30vh;
+  max-height: 30vh;
+  width: 90vh;
   left: 100px;
-  bottom: 10px;
+}
+
+.card-content.data-table {
   overflow: scroll;
+  height: 20vh;
 }
 
 .tablerow {
@@ -63,7 +69,7 @@
 }
 
 .descr {
-  width: 2ch;
+  width: 12ch;
   overflow: hidden;
 }
 

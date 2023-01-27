@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+/**
+ * Input component which takes a search function with an optional key and returns filtered data.
+ */
 export class SearchBar extends Component {
     constructor(props) {
         super(props)
@@ -11,20 +14,16 @@ export class SearchBar extends Component {
      * Can optionally pass data using props.data
      */
     handleChange(e){
-        this.props.FilterByText(e)
+        this.props.FilterByText(e, this.props.searchKey)
     }
 
     render() {
         return(
-            <div>
-                <input 
-                    onChange = {this.props.FilterByText} 
-                    className = "Search-Bar" 
-                    tag={this.props.tag}
-                    id = {this.props.id}>
-                        {this.props.text}
-                </input>
-            </div>
+            <input 
+                onChange = {this.handleChange} 
+                className = "Search-Bar"
+                id = {this.props.id}>
+            </input>
         );
     }
 }

@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import { ActionButton } from '../../Buttons/ActionButton';
-import { TextArea } from '../../Inputs/TextArea';
-import { TextInput } from '../../Inputs/TextInput';
 import { Card } from '../../Cards/Card';
 import { CardTitlebar } from '../../Cards/CardTitlebar';
 import { CardContent } from '../../Cards/CardContent';
-import { StaticForm } from '../../Forms/StaticForm';
 import { InputForm } from '../../Forms/InputForm';
 import { FloatContainer } from '../../Containers/FloatContainer';
 import { ActionRow } from '../../Tables/DataTable/ActionRow';
+import { Droplist } from '../../../../Data/Droplist';
 
 export class UserInfo extends Component{
 	constructor(props){
